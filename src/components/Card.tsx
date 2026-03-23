@@ -1,52 +1,33 @@
-type CardProps = {
-  image: string;
-  title: string;
-  description: string;
-};
+import React from 'react';
 
-function Card({ image, title, description }: CardProps) {
+interface CardProps {
+    image: string;
+    title: string;
+    isActive?: boolean;
+}
+
+const Card: React.FC<CardProps> = ({ image, title, isActive = false }) => {
     return (
-        <div className="
-        w-50
-        h-75
-        rounded-2xl
-        cursor-pointer">
-            <div
-            className={
-            `relative
-            bg-cover
-            bg-center
+        <div className={`
+            flex
+            flex-col
+            items-center
+            bg-white/10
+            backdrop-blur-sm
+            rounded-lg
+            p-1
             w-full
             h-full
-            rounded-2xl
-            justify-center
-            flex-col
-            text-center
-            bottom-0
-            border-black
-            border
-            hover:border-white
-            transition`}
-            style={{ backgroundImage: `url("${image}")` }}>
-                <div className="
-                bg-black/[.60]
-                text-white
-                text-shadow-black
-                text-shadow-lg
-                p-2
-                px-5
-                pb-5
-                h-fit
-                w-full
-                absolute
-                bottom-3">
-                    <h2 className="text-lg/[.90]">{title}</h2>
-                    <br />
-                    <p className="text-xs/[.90] font-light">{description}</p>
-                </div>
-            </div>
+            shadow-lg
+            transition-all
+            duration-500
+            cursor-pointer
+            ${isActive ? 'scale-105 border-2 border-white/50 opacity-100' : 'scale-100 opacity-50'}
+        `}>
+            <img src={image} alt={title} className="w-19/20 h-3/4 object-cover rounded-md mb-4 pt-2" />
+            <h3 className="text-lg font-bold">{title}</h3>
         </div>
     );
-}
+};
 
 export default Card;
